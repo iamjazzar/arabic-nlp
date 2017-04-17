@@ -18,6 +18,9 @@ def tatweel_removal(text):
     :param text: The text that we need to extract the Tatweel from.
     :return: A text without Tatweels.
     """
+    if text is None:
+        return None
+
     return text.replace(ase.TATWEEL, '')
 
 
@@ -31,6 +34,9 @@ def diacritic_removal(text):
     :param text: The text that we need to extract diacritics from.
     :return: A text without diacritics.
     """
+    if text is None:
+        return None
+
     for diacritic in ase.DIACRITICS:
         text = text.replace(diacritic, '')
 
@@ -65,6 +71,9 @@ def letter_normalization(text, egyptian=False):
     :param egyptian: To flag if we want to normalize the Alif-Maqsura.
     :return: A letter-normalized string
     """
+    if text is None:
+        return None
+
     if egyptian:
         text = text.replace(ase.ALIF_MAQSURA, 'ي')
 
