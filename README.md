@@ -1,4 +1,4 @@
-# arabic-nlp
+# arabic-nlp [![Build Status](https://travis-ci.org/ahmedaljazzar/arabic-nlp.svg?branch=master)](https://travis-ci.org/ahmedaljazzar/arabic-nlp) [![Build Status](https://travis-ci.org/ahmedaljazzar/arabic-nlp.svg?branch=master)](https://travis-ci.org/ahmedaljazzar/arabic-nlp)
 The Arabic NLP Python Library
 
 ## Project Status

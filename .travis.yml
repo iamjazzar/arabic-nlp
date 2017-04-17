@@ -1,0 +1,8 @@
+language: python
+python:
+  - "3.6.0"
+
+script: python -m unittest
+after_success:
+  - coverage report
+  - codecov -t c4989a8c-a542-4fd1-bb6b-98a93caf0285
