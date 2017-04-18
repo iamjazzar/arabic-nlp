@@ -1,10 +1,13 @@
 import unittest
 
 from normalization.orthographic_normalization import tatweel_removal, \
-    diacritic_removal, letter_normalization
+    diacritic_removal, letter_normalization, encoding_cleanup
 
 
 class TestOrthographicNormalization(unittest.TestCase):
+    def test_encoding_cleanup(self):
+        self.assertRaises(NotImplementedError, encoding_cleanup)
+
     def test_tatweel_removal(self):
         # Empty String
         self.assertEqual(tatweel_removal(''), '')
@@ -58,6 +61,10 @@ class TestOrthographicNormalization(unittest.TestCase):
         self.assertEqual(diacritic_removal(all_diacritic), without_diacritics)
 
     def test_letter_normalization(self):
+        # Testing None
+        self.assertIsNone(letter_normalization(None))
+        self.assertIsNone(letter_normalization(None, egyptian=True))
+
         # Testing without egyption
         self.assertEqual(
             letter_normalization('مستشفى'), 'مستشفى')
