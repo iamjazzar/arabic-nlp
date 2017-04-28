@@ -1,7 +1,8 @@
 import unittest
 
 from normalization.orthographic_normalization import tatweel_removal, \
-    diacritic_removal, letter_normalization, encoding_cleanup
+    diacritic_removal, letter_normalization, encoding_cleanup, \
+    punctuation_removal, clean_text
 
 
 class TestOrthographicNormalization(unittest.TestCase):
@@ -89,3 +90,38 @@ class TestOrthographicNormalization(unittest.TestCase):
             letter_normalization('لؤلؤ', egyptian=True), 'لءلء')
         self.assertEqual(
             letter_normalization('أرجئ', egyptian=True), 'ارجء')
+
+    def test_punctuation_removal(self):
+        # Testing None and empty space
+        self.assertIsNone(punctuation_removal(None))
+        self.assertEqual(punctuation_removal(''), '')
+
+        # Test texts
+        clean_text = 'أحمد'
+        punctuated = 'يا عليّ، استذكر دروسك.'
+        not_punctuated = 'يا عليّ استذكر دروسك'
+        self.assertEqual(punctuation_removal(clean_text), clean_text)
+        self.assertEqual(punctuation_removal(punctuated), not_punctuated)
+        self.assertEqual(punctuation_removal('،.(*'), '')
+
+    def test_clean_text(self):
+        # Testing None and empty space
+        self.assertIsNone(clean_text(None))
+        self.assertEqual(clean_text(''), '')
+
+        # Test texts
+        cleaned_text = 'أحمد'
+        punctuated = 'يا عليّ، استذكر دروسك.'
+        cleaned_punctuated = 'يا علي استذكر دروسك'
+
+        self.assertEqual(clean_text(cleaned_text), cleaned_text)
+        self.assertEqual(clean_text(punctuated), cleaned_punctuated)
+
+        self.assertEqual(clean_text('     '), '')
+        self.assertEqual(clean_text('     أحمد'), cleaned_text)
+        self.assertEqual(clean_text('     أحمد    '), cleaned_text)
+        self.assertEqual(clean_text('أحمد      '), cleaned_text)
+        self.assertEqual(clean_text('،.(*'), '')
+
+        self.assertEqual(clean_text('dsafasdf'), '')
+        self.assertEqual(clean_text('sdأcdحbbمaaدaa'), cleaned_text)
