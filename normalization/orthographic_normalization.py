@@ -43,6 +43,24 @@ def diacritic_removal(text):
     return text
 
 
+def punctuation_removal(text):
+    """
+    Remove all punctuation marks from text
+    :param text:
+    :return: A punctuation-free text
+    """
+    if text is None:
+        return None
+
+    for mark in ase.PUNCTUATION_MARKS:
+        if mark in ase.NUMBERS_PUNCTUATION_MARKS:
+            continue
+
+        text = text.replace(mark, '')
+
+    return text
+
+
 def letter_normalization(text, egyptian=False):
     """
     There are four letters in Arabic that are so often misspelled using
@@ -86,3 +104,23 @@ def letter_normalization(text, egyptian=False):
         text = text.replace(form, ase.HAMZA)
 
     return text
+
+
+def clean_text(text):
+        """
+        Cleans the word by removing punctuations, diacritics, non-letter
+        characters.
+        :param text: The word to clean
+        :return: A cleaned word that has nothing but letters.
+        """
+        if text is None:
+            return None
+
+        # Remove whitespace characters from the beginning and the end
+        text = text.strip()
+
+        for letter in text:
+            if letter not in ase.LETTERS and letter != ' ':
+                text = text.replace(letter, '')
+
+        return text
